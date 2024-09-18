@@ -47,11 +47,6 @@ public class ClienteController {
     @PostMapping
     public String update(@RequestParam int idCliente, @ModelAttribute Cliente clienteActualizado, @ModelAttribute Direccion direccionActualizada, @RequestParam int idComuna, @RequestParam int idTipoVivienda, @RequestParam int idRegion, Model model) {
         clienteService.update(idCliente, clienteActualizado, direccionActualizada, idComuna, idTipoVivienda, idRegion);
-        // Redirigir a una vista correcta o actualizar el modelo y retornar la vista correcta
-        //model.addAttribute("cliente", clienteService.findOne(idCliente));
-        //model.addAttribute("comunas", comunaService.findAll());
-        //model.addAttribute("tipoViviendas", tipoViviendaService.findAll());
-        //model.addAttribute("regiones", regionService.findAll());
         return "redirect:/clientes";
     }
 

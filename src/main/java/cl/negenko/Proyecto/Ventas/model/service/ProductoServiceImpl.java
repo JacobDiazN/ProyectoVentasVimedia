@@ -27,9 +27,19 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public Producto update(Producto producto) {
-        return repository.save(producto);
+    public Producto update(int id, Producto productoActualizado) {
+        return repository.findById(id).map(producto -> {
+            producto.setNombre(productoActualizado.getNombre());
+            producto.setPrecio(productoActualizado.getPrecio());
+            producto.setDescripcion(productoActualizado.getDescripcion());
+            producto.setImagenUrl(productoActualizado.getImagenUrl());
+
+            return repository.save(producto);
+
+
+        }).orElseThrow(() -> new IllegalArgumentException("Producto no encontrado"));
     }
+
 
     @Override
     public Producto create(Producto producto) {

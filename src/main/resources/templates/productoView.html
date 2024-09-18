@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lista de Productos</title>
+    <title>Lista de un producto</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -35,64 +35,48 @@
 </head>
 <body class="container bg-dark4 text-center">
     <div>
-        <div th:replace="menu :: nav"></div>
-        <br>
-        <hr>
-        <div class="pt-5 text-secondary">
-            <h1>Listado de Productos</h1>
+        <div class="pb-5" th:replace="menu :: nav"></div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="pt-5 text-secondary">
+        <h1 th:text="${producto.getNombre()}"></h1>
+    </div>
+    <div class="d-flex justify-content-center pt-4">
+        <div class="m-2">
+            <a th:href="@{/productos/{id}(id=${producto.getIdProducto()})}" class="btn btn-primary my-2">Modificar Producto</a>
+        </div>
+        <div class="m-2">
+            <a th:href="@{/productos/{id}/del(id=${producto.getIdProducto()})}" class="btn btn-secondary my-2">Eliminar Producto</a>
+        </div>
+        <div class="m-2">
+            <a th:href="@{/productos}" class="btn bg-dark my-2 text-light">Volver</a>
         </div>
     </div>
-    <div class="d-flex justify-content-flex-start pb-4">
-        <div class="m-2">
-            <a th:href="@{/productos/new}" class="btn btn-primary my-2">Ingresar nuevo Producto</a>
-        </div>
-        <div class="m-2">
-            <a th:href="@{/}" class="btn bg-dark my-2 text-light">Volver</a>
-        </div>
-    </div>
-    <main class="container">
-        <table class="table table-striped" id="clientesTbl">
-            <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Precio</th>
-                        <th>Descripción</th>
-                        <th class="text-center">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="text-center" th:each="p: ${productos}">
-                        <td class="text-center" th:text="${p.idProducto}"></td>
-                        <td class="text-center" th:text="${p.nombre}"></td>
-                        <td class="text-center" th:text="${p.precio}"></td>
-                        <td class="text-center" th:text="${p.descripcion}"></td>
-                        <td class="d-flex justify-content-center">
-                            <div class="m-2">
-                                <a th:href="@{/productos/producto/{id}(id=${p.getIdProducto()})}">
-                                    <i class="fa-regular fa-eye"></i>
-                                </a>
-                            </div>
-                            <div class="m-2">
-                                <a th:href="@{/productos/{id}(id=${p.getIdProducto()})}">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                            </div>
-                            <div class="m-2">
-                                <a th:href="@{/productos/{id}/del(id=${p.getIdProducto()})}">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        <div class="pt-2 d-flex justify-content-flex-start">
-            <div class="m-2">
-                <a th:href="@{/}" class="btn bg-dark my-2 text-light">Volver</a>
+    <section id="My Projects" class="container d-flex justify-content-center  hide-on-small-screen pb-5 pt-5">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 fl">
+            <div class="card card1 shadow-lg" style="background-color: rgba(173, 181, 189, 0.1);" onmouseover="enlargeCard(this)" onmouseout="resetCardSize(this)">
+                <div class="card-header gris-700 text-center">
+                    <h5 class="card-title roboto-regular text-center">
+                        <h3 th:text="'Codigo: ' + ${producto.getIdProducto()}"></h3>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-center">
+                        <img class="img-fluid card_img2" th:src="${producto.getImagenUrl()}" alt="">
+                    </div>
+                    <h3 class="text-text-gris-600 pt-2" th:text="${producto.getNombre()}"></h3>
+                    <h4 class="text-text-gris-600" th:text="'$' + ${producto.getPrecio()}"></h4>
+                    <p class="lead" th:text="${producto.getDescripcion()}"></p>
+                    <p class="card-text roboto-thin text-text-gris-600 text-center pt-3">
+                        "Confía en Negenko para una hidratación pura y natural. "
+                        <i class="fa-solid fa-hand-holding-droplet" style="color: #74C0FC;"></i>
+                    </p>
+                </div>
             </div>
         </div>
-    </main>
+    </section>
     <br>
     <footer th:replace="footer :: footer"></footer>
 

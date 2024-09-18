@@ -37,7 +37,7 @@
     </div>
 </div>
     <main class="d-flex justify-content-center text-start">
-        <form th:action="@{/clientes}" method="post" class="form"  th:object="${cliente}">
+        <form th:action="@{/clientes}" method="post" class="col-lg-6 col-md-8 col-sm-12 col-xs-12"  th:object="${cliente}">
             <input type="hidden" id="idCliente" name="idCliente" th:value="${cliente.getIdCliente()}"><!--El name es identico al nombre del atributo de la clase-->
             <div class="mb-3">
                 <label for="nombre" class="col-form-label">Nombre</label>
@@ -55,11 +55,7 @@
                 <label for="telefono" class="col-form-label">Telefono</label>
                 <input type="text" id="telefono" name="telefono" class="form-control" th:value="${cliente.getTelefono()}" required>
             </div>
-            <div class="mb-3">
-                <label for="detalle" class="col-form-label">Detalle</label>
-                <textarea id="detalle" name="detalle" rows="4" class="form-control" placeholder="Piso, Torre, número de departamento, número de casa, etc"
-                          th:text="${cliente.getDireccion().getDetalle()}"></textarea>
-            </div>
+
 
             <!-- Dirección -->
             <div class="mb-3">
@@ -69,6 +65,11 @@
             <div class="mb-3">
                 <label for="numero" class="col-form-label">Numeración</label>
                 <input type="text" id="numero" name="numero" class="form-control" th:value="${cliente.direccion.getNumero()}" required>
+            </div>
+            <div class="mb-3">
+                <label for="detalle" class="col-form-label">Detalle</label>
+                <textarea id="detalle" name="detalle" rows="4" class="form-control" placeholder="Piso, Torre, número de departamento, número de casa, etc"
+                          th:text="${cliente.getDireccion().getDetalle()}"></textarea>
             </div>
             <!-- Tipo de vivienda -->
             <div class="mb-3">
@@ -103,7 +104,7 @@
                 </select>
             </div>
 
-            <div class="pt-5 d-flex justify-content-flex-start">
+            <div class="pt-5 d-flex justify-content-center">
                 <div>
                     <button type="submit" class="btn btn-primary mr-1">Guardar</button>
                 </div>

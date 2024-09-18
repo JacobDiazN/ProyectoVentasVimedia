@@ -1,5 +1,6 @@
 package cl.negenko.Proyecto.Ventas.controller;
 
+import cl.negenko.Proyecto.Ventas.model.entities.Cliente;
 import cl.negenko.Proyecto.Ventas.model.entities.Producto;
 import cl.negenko.Proyecto.Ventas.model.service.*;
 import org.springframework.stereotype.Controller;
@@ -26,25 +27,24 @@ public class ProductoController {
 
     @GetMapping("/{id}")
     public String findOne(@PathVariable("id") int id, Model model){
-        model.addAttribute("cliente", productoService.findOne(id));
+        model.addAttribute("producto", productoService.findOne(id));
         return "productoEdit";
     }
 
-    @GetMapping("cliente/{id}")
+    @GetMapping("producto/{id}")
     public String findOneP(@PathVariable("id") int id, Model model){
-        model.addAttribute("cliente", productoService.findOne(id));
-        return "productoOneList";
+        model.addAttribute("producto", productoService.findOne(id));
+        return "productoView";
     }
 
     @PostMapping
-    public String update(@ModelAttribute Producto producto) {
-        productoService.update(producto);
+    public String update(@RequestParam int idProducto, @ModelAttribute Producto productoActualizado) {
+        productoService.update(idProducto, productoActualizado);
         return "redirect:/productos";
     }
 
     @GetMapping("/new")
     public String toCreate(Model model){
-        model.addAttribute("productos", productoService.findAll());
         return "productoNew";
     }
 
